@@ -4,3 +4,5 @@
 
 [State Population data](
 https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/SCPRC-EST2019-18+POP-RES.csv)
+
+[State Geographical data (not csv)](https://www.census.gov/geographies/reference-files/2010/geo/state-area.html)
