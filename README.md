@@ -20,6 +20,7 @@ https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/
 ## Geographical Data
 [State Geographical data (not csv)](https://www.census.gov/geographies/reference-files/2010/geo/state-area.html)
 
+[County Geographical Data](https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk)
 
 
 ## NY Times US only time-series data
