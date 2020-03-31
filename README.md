@@ -1,5 +1,5 @@
 # DS
-
+## Data Source
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fm75/DS/master?urlpath=lab)
 
 [State Population data](
@@ -10,3 +10,9 @@ https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/
 [NJ population data](https://www.newjersey-demographics.com/counties_by_population)
 
 [US county data](https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv)
+
+#### NY Times US only time-series data
+
+[ U.S. State-Level Data (Raw CSV)](https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv)
+
+[ U.S. County-Level Data (Raw CSV) ](https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv)
