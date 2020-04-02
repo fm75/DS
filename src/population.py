@@ -13,16 +13,32 @@ def us_county_population(csvfile: Path) -> pd.DataFrame:
     return population
 
 
+def strip_county_name(name: str) -> str:
+    return name[:-7] if name[-6:].lower() == 'county' else name
+
+
 def nj_county_population(url: str) -> pd.DataFrame:
     header = {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
       "X-Requested-With": "XMLHttpRequest"
     }
-
+    names = ['County', 'Population']
     r = requests.get(url, headers=header)
-    population = pd.read_html(r.text, header=[0], index_col=0, skiprows=[22])[0]
-    population = population[['County', 'Population']]
+    population = pd.read_html(r.text, header=[0], index_col=0, 
+                              skiprows=[22], converters={'County':strip_county_name})[0]
+    population = population[names]
     return population.rename(columns={"County": "county", "Population": "pop2019"})
+
+# def nj_county_population(url: str) -> pd.DataFrame:
+#     header = {
+#       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
+#       "X-Requested-With": "XMLHttpRequest"
+#     }
+
+#     r = requests.get(url, headers=header)
+#     population = pd.read_html(r.text, header=[0], index_col=0, skiprows=[22])[0]
+#     population = population[['County', 'Population']]
+#     return population.rename(columns={"County": "county", "Population": "pop2019"})
 
 
 # state level functions
