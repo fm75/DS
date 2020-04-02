@@ -3,18 +3,22 @@ import requests
 from pathlib import Path
 
 
+
+def strip_county_name(name: str) -> str:
+    '''Remove " County" from county names.'''
+    return name[:-7] if name[-6:].lower() == 'county' else name
+
+
 # county level functions
 # us_county_population_path = Path('../data/co-est2019-alldata.csv')
 # nj_county_population_url = 'https://www.newjersey-demographics.com/counties_by_population'
 def us_county_population(csvfile: Path) -> pd.DataFrame:
-    population = pd.read_csv(csvfile, encoding = "ISO-8859-1")
-    population = population[["STNAME", 'CTYNAME', 'POPESTIMATE2019']]
-    return population.rename(columns={"STNAME": "state", "CTYNAME": "county", "POPESTIMATE2019": "pop2019"})
+    colmap = {"STNAME": "state", "CTYNAME": "county", "POPESTIMATE2019": "pop2019"}
+    population = pd.read_csv(csvfile, encoding = "ISO-8859-1",
+                             usecols=colmap,
+                             converters={'CTYNAME':strip_county_name})
     return population
 
-
-def strip_county_name(name: str) -> str:
-    return name[:-7] if name[-6:].lower() == 'county' else name
 
 
 def nj_county_population(url: str) -> pd.DataFrame:
@@ -28,17 +32,6 @@ def nj_county_population(url: str) -> pd.DataFrame:
                               skiprows=[22], converters={'County':strip_county_name})[0]
     population = population[names]
     return population.rename(columns={"County": "county", "Population": "pop2019"})
-
-# def nj_county_population(url: str) -> pd.DataFrame:
-#     header = {
-#       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
-#       "X-Requested-With": "XMLHttpRequest"
-#     }
-
-#     r = requests.get(url, headers=header)
-#     population = pd.read_html(r.text, header=[0], index_col=0, skiprows=[22])[0]
-#     population = population[['County', 'Population']]
-#     return population.rename(columns={"County": "county", "Population": "pop2019"})
 
 
 # state level functions
