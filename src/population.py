@@ -38,15 +38,19 @@ def nj_county_population(url: str) -> pd.DataFrame:
 # state_geog_path = Path('../data/us_geography.csv')
 # state_population_path = Path('../data/SCPRC-EST2019-18+POP-RES.csv')
 def state_geography(csvfile: Path) -> pd.DataFrame:
-    geog = pd.read_csv(csvfile, thousands=',')
-    geog = geog[['State', 'tot_sq_mi', 'land_sq_mi']]
-    return geog.rename(columns={"State": "state", })
+    colmap = {"State": "state", 'tot_sq_mi':'tot_sq_mi', 'land_sq_mi':'land_sq_mi'}
+    return pd.read_csv(csvfile, thousands=',', usecols=colmap)
+#     geog = geog[['State', 'tot_sq_mi', 'land_sq_mi']]
+#     return geog.rename(columns={"State": "state", })
+#     return geog
 
 
 def state_population(csvfile: Path) -> pd.DataFrame:
-    population = pd.read_csv(csvfile)
-    population = population[["NAME", 'POPESTIMATE2019']]
-    return population.rename(columns={"NAME": "state", "POPESTIMATE2019": "pop2019"})
+    colmap = {"NAME": "state", "POPESTIMATE2019": "pop2019"}
+    return pd.read_csv(csvfile, usecols=colmap)
+#     return population
+#     population = population[["NAME", 'POPESTIMATE2019']]
+#     return population.rename(columns={"NAME": "state", "POPESTIMATE2019": "pop2019"})
 
 
 def state_population_density(state_population_path: Path, state_geog_path: Path) -> pd.DataFrame:
