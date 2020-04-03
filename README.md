@@ -10,14 +10,17 @@
 
 Daily filenames in `mm-dd-yyyy.csv` format
 ## Population Data
-[US State data](
+- [US State data](
 https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/SCPRC-EST2019-18+POP-RES.csv)
 
-[US county data](https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv)
+- [US county data](https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv)
 
-[NJ population data](https://www.newjersey-demographics.com/counties_by_population)
+- [NJ population data](https://www.newjersey-demographics.com/counties_by_population)
 
-[NY population data](https://www.newyork-demographics.com/counties_by_population)
+- [NY population data](https://www.newyork-demographics.com/counties_by_population)
+
+- County population are stored in `data/counties[state].csv`.
+where state is all lower case with spaces stripped.
 
 ## Geographical Data
 [State Geographical data (not csv)](https://www.census.gov/geographies/reference-files/2010/geo/state-area.html)

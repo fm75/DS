@@ -7,6 +7,8 @@ from pathlib import Path
 def strip_county_name(name: str) -> str:
     '''Remove " County" from county names.'''
     return name[:-7] if name[-6:].lower() == 'county' else name
+def domainify(state: str) -> str:
+    return f"https://www.{state.replace(' ', '').lower()}-demographics.com/counties_by_population"
 
 
 # county level functions
@@ -21,7 +23,8 @@ def us_county_population(csvfile: Path) -> pd.DataFrame:
 
 
 def us_county_population(url: str) -> pd.DataFrame:
-    '''Get latest county population'''
+    '''Get latest county population.
+    Omit the last line retrieved which is just an explanation.'''
     header = {
       "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
       "X-Requested-With": "XMLHttpRequest"
