@@ -20,6 +20,19 @@ def us_county_population(csvfile: Path) -> pd.DataFrame:
     return population
 
 
+def us_county_population(url: str) -> pd.DataFrame:
+    '''Get latest county population'''
+    header = {
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+    names = ['County', 'Population']
+    r = requests.get(url, headers=header)
+    population = pd.read_html(r.text, header=[0], index_col=0, 
+                              converters={'County':strip_county_name})[0]
+    population = population[names]
+    return population.rename(columns={"County": "county", "Population": "pop2019"})[:-1]
+
 
 def nj_county_population(url: str) -> pd.DataFrame:
     header = {
