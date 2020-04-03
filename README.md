@@ -16,6 +16,7 @@ https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/
 [US county data](https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv)
 
 [NJ population data](https://www.newjersey-demographics.com/counties_by_population)
+[NY population data](https://www.newyork-demographics.com/counties_by_population)
 
 ## Geographical Data
 [State Geographical data (not csv)](https://www.census.gov/geographies/reference-files/2010/geo/state-area.html)
