@@ -4,7 +4,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fm75/DS/master?urlpath=lab)   **JupyterLab**
 
 # Analysis
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fm75/interactive/master?filepath=analysis%2Fstates.ipynb) States
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fm75/DS/master?filepath=analysis%2Fstates.ipynb) States
 
 # Data Sources
 ## Daily COVID-19 Data
