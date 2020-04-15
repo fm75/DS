@@ -1,6 +1,7 @@
 import pandas as pd
-import datetime as dt
+from datetime import datetime as dt
 from typing import List
+from us.covid import daily_snapshot
 
 pd.set_option('max_rows', 300)
 
@@ -25,12 +26,13 @@ def covid_columns () -> List[str]:
 
 
 def update_dataframes(state:str, date: dt.date) -> bool:
+    global daily
     global county_pop
     global current_date
     global current_state
     changed = False
     if date != current_date:
-        daily = daily_snapshot(datetime.strftime(date, '%m-%d-%Y'))
+        daily = daily_snapshot(dt.strftime(date, '%m-%d-%Y'))
         current_date = date
         changed = True
     if state != current_state:
@@ -41,6 +43,9 @@ def update_dataframes(state:str, date: dt.date) -> bool:
 
 
 def update_merge(state:str, date: dt.date) -> pd.DataFrame:
+    global state_with_population
+    global daily
+    global county_pop
     state_covid = daily[daily.Province_State == state].copy()
     state_with_population = pd.merge(state_covid[covid_columns()], 
                                      county_pop,
@@ -49,9 +54,10 @@ def update_merge(state:str, date: dt.date) -> pd.DataFrame:
                                      right_on='county')
     state_with_population['fraction_confirmed'] = state_with_population['Confirmed'] / state_with_population['pop2019']   * 1000.0
     state_with_population['deaths']             = state_with_population['Deaths']    / state_with_population['pop2019']   * 1000.0
-    state_with_population['death_rate?']        = state_with_population['Deaths']    / state_with_                                     
+    state_with_population['death_rate?']        = state_with_population['Deaths']    / state_with_population['Confirmed'] * 1000.0                              
 
 def update_stats(state:str, date: dt.date) -> pd.DataFrame:
+    global state_with_population
     changed = update_dataframes(state, date)
     if changed:
         update_merge(state, date)
@@ -59,6 +65,7 @@ def update_stats(state:str, date: dt.date) -> pd.DataFrame:
 
 
 def update_counties(state: str, date: dt.date, column: str, ascending: bool) -> pd.DataFrame:
+    global state_with_population
     changed = update_dataframes(state, date)
     if changed:
         update_merge(state, date)
