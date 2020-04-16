@@ -22,8 +22,8 @@ state_w = pnw.Select(
 
 sortby_w = pnw.Select(
     name='sort on column',
-    options=['county', 'pop2019'],
-    value='pop2019',
+    options=sort_cols,
+    value='fraction_confirmed',
     disabled=False
     )
 
