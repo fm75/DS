@@ -59,14 +59,14 @@ def update_merge(state:str, date: dt.date) -> pd.DataFrame:
 def update_stats(state:str, date: dt.date) -> pd.DataFrame:
     global state_with_population
     changed = update_dataframes(state, date)
-    if changed:
-        update_merge(state, date)
+    #if changed:
+    update_merge(state, date)
     return state_with_population.describe()
 
 
 def update_counties(state: str, date: dt.date, column: str, ascending: bool) -> pd.DataFrame:
     global state_with_population
     changed = update_dataframes(state, date)
-    if changed:
-        update_merge(state, date)
+    #if changed:
+    update_merge(state, date)
     return state_with_population.sort_values(by=column, ascending=ascending)
