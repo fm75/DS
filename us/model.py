@@ -31,14 +31,14 @@ def update_dataframes(state:str, date: dt.date) -> bool:
     global current_date
     global current_state
     changed = False
-    #if date != current_date:
-    daily = daily_snapshot(dt.strftime(date, '%m-%d-%Y'))
-    current_date = date
-    changed = True
-    #if state != current_state:
-    current_state = state
-    county_pop = pd.read_csv(county_file_name(state))
-    changed = True
+    if date != current_date:
+        daily = daily_snapshot(dt.strftime(date, '%m-%d-%Y'))
+        current_date = date
+        changed = True
+    if state != current_state:
+        current_state = state
+        county_pop = pd.read_csv(county_file_name(state))
+        changed = True
     return changed
 
 
