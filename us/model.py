@@ -14,7 +14,7 @@ current_date = None
 current_state = None
 
 def county_file_name(state: str) ->str:
-    return '/'.join(['data', 'counties', state.lower().replace(' ', '-')]) + '.csv'
+    return '/'.join(['data', 'counties', state.lower().replace(' ', '')]) + '.csv'
 
 
 def states() -> List[str]:
