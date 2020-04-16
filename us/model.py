@@ -54,7 +54,7 @@ def update_merge(state:str, date: dt.date) -> pd.DataFrame:
                                      right_on='county')
     state_with_population['fraction_confirmed'] = state_with_population['Confirmed'] / state_with_population['pop2019']   * 1000.0
     state_with_population['deaths']             = state_with_population['Deaths']    / state_with_population['pop2019']   * 1000.0
-    state_with_population['death_rate?']        = state_with_population['Deaths']    / state_with_population['Confirmed'] * 1000.0                              
+    state_with_population['death_rate']        = state_with_population['Deaths']    / state_with_population['Confirmed'] * 1000.0                              
 
 def update_stats(state:str, date: dt.date) -> pd.DataFrame:
     global state_with_population

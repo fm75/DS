@@ -11,6 +11,8 @@ pn.extension()
 stats_w    = pnw.DataFrame(pd.DataFrame(), name='stats')
 counties_w = pnw.DataFrame(pd.DataFrame(), name='counties')
 
+sort_cols = ['Confirmed', 'Deaths', 'Active', 'county', 'pop2019', 
+             'fraction_confirmed', 'death_rate']
 state_w = pnw.Select(
     name='state',
     options=uss.states(),
