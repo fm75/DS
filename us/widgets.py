@@ -7,6 +7,7 @@ import us.states  as uss
 
 
 pn.extension()
+pn.config.sizing_mode = "stretch_width"
 
 stats_w    = pnw.DataFrame(pd.DataFrame(), name='stats')
 counties_w = pnw.DataFrame(pd.DataFrame(), name='counties')
