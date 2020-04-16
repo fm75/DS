@@ -25,7 +25,7 @@ def covid_columns () -> List[str]:
     return ['Admin2', 'Confirmed', 'Deaths', 'Recovered', 'Active', ]
 
 
-def update_dataframes(state:str, date: dt.date) -> bool:
+def update_dataframes(state:str, date: dt.date) -> None:
     global daily
     global county_pop
     global current_date
@@ -39,7 +39,8 @@ def update_dataframes(state:str, date: dt.date) -> bool:
         current_state = state
         county_pop = pd.read_csv(county_file_name(state))
         changed = True
-    return changed
+    if changed:
+        update_merge(state, date)
 
 
 def update_merge(state:str, date: dt.date) -> pd.DataFrame:
@@ -54,19 +55,15 @@ def update_merge(state:str, date: dt.date) -> pd.DataFrame:
                                      right_on='county')
     state_with_population['fraction_confirmed'] = state_with_population['Confirmed'] / state_with_population['pop2019']   * 1000.0
     state_with_population['deaths']             = state_with_population['Deaths']    / state_with_population['pop2019']   * 1000.0
-    state_with_population['death_rate']        = state_with_population['Deaths']    / state_with_population['Confirmed'] * 1000.0                              
+    state_with_population['death_rate']         = state_with_population['Deaths']    / state_with_population['Confirmed'] * 1000.0                              
 
 def update_stats(state:str, date: dt.date) -> pd.DataFrame:
     global state_with_population
-    changed = update_dataframes(state, date)
-    if changed:
-        update_merge(state, date)
+    update_dataframes(state, date)
     return state_with_population.describe()
 
 
 def update_counties(state: str, date: dt.date, column: str, ascending: bool) -> pd.DataFrame:
     global state_with_population
-    changed = update_dataframes(state, date)
-    if changed:
-        update_merge(state, date)
+    update_dataframes(state, date)
     return state_with_population.sort_values(by=column, ascending=ascending)
