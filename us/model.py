@@ -22,25 +22,34 @@ def states() -> List[str]:
 
 
 def covid_columns () -> List[str]:
-    return ['Admin2', 'Confirmed', 'Deaths', 'Recovered', 'Active', ]
+    return ['Admin2', 'Confirmed', 'Deaths', 'Active', ]
 
 
+# def update_dataframes(state:str, date: dt.date) -> None:
+#     global daily
+#     global county_pop
+#     global current_date
+#     global current_state
+#     changed = False
+#     if date != current_date:
+#         daily = daily_snapshot(dt.strftime(date, '%m-%d-%Y'))
+#         current_date = date
+#         changed = True
+#     if state != current_state:
+#         current_state = state
+#         county_pop = pd.read_csv(county_file_name(state))
+#         changed = True
+#     if changed:
+#         update_merge(state, date)
+
+        
 def update_dataframes(state:str, date: dt.date) -> None:
     global daily
     global county_pop
-    global current_date
-    global current_state
-    changed = False
-    if date != current_date:
-        daily = daily_snapshot(dt.strftime(date, '%m-%d-%Y'))
-        current_date = date
-        changed = True
-    if state != current_state:
-        current_state = state
-        county_pop = pd.read_csv(county_file_name(state))
-        changed = True
-    if changed:
-        update_merge(state, date)
+
+    daily = daily_snapshot(dt.strftime(date, '%m-%d-%Y'))
+    county_pop = pd.read_csv(county_file_name(state))
+    update_merge(state, date)
 
 
 def update_merge(state:str, date: dt.date) -> pd.DataFrame:
