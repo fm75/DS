@@ -69,10 +69,30 @@ def update_merge(state:str, date: dt.date) -> pd.DataFrame:
 def update_stats(state:str, date: dt.date) -> pd.DataFrame:
     global state_with_population
     update_dataframes(state, date)
-    return state_with_population.describe()
+    fmt = dict(
+              Confirmed='{:,.1f}',
+              Deaths='{:,.1f}',
+              Active='{:,.1f}',
+              Rank='{:,.1f}',
+              pop2019='{:,.1f}',
+              fraction_confirmed='{:,.1f}',
+              deaths='{:,.1f}',
+              death_rate='{:,.1f}',
+    )
+    return state_with_population.describe().style.format(fmt)
 
 
 def update_counties(state: str, date: dt.date, column: str, ascending: bool) -> pd.DataFrame:
     global state_with_population
     update_dataframes(state, date)
-    return state_with_population.sort_values(by=column, ascending=ascending)
+    fmt = dict(
+              Confirmed='{:,.0f}',
+              Deaths='{:,.0f}',
+              Active='{:,.0f}',
+              Rank='{:,.0f}',
+              pop2019='{:,.0f}',
+              fraction_confirmed='{:,.1f}',
+              deaths='{:,.1f}',
+              death_rate='{:,.1f}',
+    )
+    return state_with_population.sort_values(by=column, ascending=ascending).style.format(fmt).hide_index()
